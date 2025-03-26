@@ -40,4 +40,12 @@ public class TransactionService {
             return repository.save(record);
         }).orElseThrow(() -> new RuntimeException("Transaction not found"));
     }
+
+    public boolean deleteTransaction(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

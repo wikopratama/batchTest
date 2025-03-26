@@ -38,4 +38,14 @@ public class TransactionController {
         Optional<TransactionRecord> updatedTransaction = Optional.ofNullable(transactionService.updateTransaction(id, transactionDetails));
         return updatedTransaction.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
+        boolean deleted = transactionService.deleteTransaction(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
